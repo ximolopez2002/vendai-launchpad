@@ -1,5 +1,6 @@
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
+import AdvantageSection from "@/components/landing/AdvantageSection";
 import BentoSection from "@/components/landing/BentoSection";
 import SolutionsSection from "@/components/landing/SolutionsSection";
 import ROISection from "@/components/landing/ROISection";
@@ -11,6 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
+      <AdvantageSection />
       <BentoSection />
       <SolutionsSection />
       <ROISection />
