@@ -35,7 +35,7 @@ const CTASection = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/demo">
-                <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
+                <Button variant="hero" size="lg" className="rounded-full px-8 text-base">
                   Agendar Demo Gratuita
                   <ArrowRight size={18} />
                 </Button>
