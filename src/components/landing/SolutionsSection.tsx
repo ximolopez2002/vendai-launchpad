@@ -29,18 +29,24 @@ const solutions = [
 
 const SolutionsSection = () => {
   return (
-    <section id="soluciones" className="py-24 relative">
+    <section id="soluciones" className="py-28 relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <p className="text-sm font-medium text-primary mb-3 font-display tracking-wide uppercase">
             Soluciones
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-4">
             Dos problemas. Una plataforma.
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="space-y-8 max-w-5xl mx-auto">
+        <div className="space-y-6 max-w-5xl mx-auto">
           {solutions.map((solution, idx) => (
             <motion.div
               key={solution.tag}
@@ -48,9 +54,9 @@ const SolutionsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
-              <span className="inline-block text-xs font-medium text-primary bg-primary/10 rounded-full px-3 py-1 mb-4 font-display">
+              <span className="inline-block text-[11px] font-medium text-cyan-accent bg-cyan/8 rounded-full px-3 py-1 mb-4 font-display tracking-wide">
                 {solution.tag}
               </span>
               <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
@@ -60,7 +66,6 @@ const SolutionsSection = () => {
                 {solution.description}
               </p>
 
-              {/* Stats */}
               <div className="grid grid-cols-3 gap-6 mb-8">
                 {solution.stats.map((stat) => (
                   <div key={stat.label}>

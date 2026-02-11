@@ -48,9 +48,8 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card/50">
+    <footer style={{ borderTop: "1px solid hsl(0 0% 100% / 0.05)", background: "hsl(240 4% 7%)" }}>
       <div className="container mx-auto px-6 py-16">
-        {/* Top section */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
@@ -58,18 +57,18 @@ const Footer = () => {
               Vend<span className="gradient-text-accent">AI</span>
             </a>
             <p className="text-sm text-muted-foreground mt-4 max-w-[200px] leading-relaxed">
-              Inteligencia Artificial que transforma tu proceso comercial B2B.
+              Fuerza laboral digital que transforma tu soporte en ventas.
             </p>
-            {/* Social */}
             <div className="flex gap-3 mt-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-9 h-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all duration-200"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-all duration-200 hover:shadow-[0_0_12px_-3px_hsl(225_100%_59%_/_0.3)]"
+                  style={{ background: "hsl(0 0% 100% / 0.04)", border: "1px solid hsl(0 0% 100% / 0.06)" }}
                   aria-label={social.label}
                 >
-                  <social.icon size={16} />
+                  <social.icon size={15} strokeWidth={1.5} />
                 </a>
               ))}
             </div>
@@ -97,8 +96,7 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: "1px solid hsl(0 0% 100% / 0.05)" }}>
           <p className="text-xs text-muted-foreground">
             © 2026 VendAI. Todos los derechos reservados.
           </p>

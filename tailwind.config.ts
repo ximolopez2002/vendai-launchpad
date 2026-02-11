@@ -26,6 +26,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          dark: "hsl(var(--primary-dark))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -42,6 +43,9 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        cyan: {
+          DEFAULT: "hsl(var(--cyan))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -77,7 +81,7 @@ export default {
           to: { height: "0" },
         },
         "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
@@ -85,16 +89,26 @@ export default {
           "100%": { opacity: "1" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px -4px hsl(225 100% 59% / 0.3)" },
-          "50%": { boxShadow: "0 0 30px -2px hsl(225 100% 59% / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 24px -4px hsl(225 100% 59% / 0.35)" },
+          "50%": { boxShadow: "0 0 36px -2px hsl(225 100% 59% / 0.55)" },
+        },
+        "pulse-border": {
+          "0%, 100%": { borderColor: "hsl(225 100% 59% / 0.2)" },
+          "50%": { borderColor: "hsl(225 100% 59% / 0.5)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.7s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2.5s ease-in-out infinite",
+        "pulse-border": "pulse-border 2s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
     },
   },
