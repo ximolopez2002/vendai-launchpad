@@ -6,25 +6,21 @@ const features = [
     title: "Resolución Autónoma",
     description: "Gestiona devoluciones y cambios sin intervención humana.",
     icon: ShieldCheck,
-    className: "md:col-span-2",
   },
   {
     title: "Integración Shopify Plus",
     description: "Lectura y escritura directa en tu ERP.",
     icon: Database,
-    className: "md:col-span-1",
   },
   {
     title: "Upselling Proactivo",
     description: "Convierte dudas de talla en carritos cerrados.",
     icon: TrendingUp,
-    className: "md:col-span-1",
   },
   {
     title: "Respuesta <10s",
     description: "Elimina el tiempo de espera.",
     icon: Zap,
-    className: "md:col-span-2",
   },
 ];
 
@@ -63,7 +59,7 @@ const AdvantageSection = () => {
 
         {/* Bento Grid - 3 columns, alternating 2-1 / 1-2 pattern */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -72,7 +68,7 @@ const AdvantageSection = () => {
           {features.map((f) => (
             <motion.div
               key={f.title}
-              className={`bento-card group flex flex-col justify-between ${f.className}`}
+              className="bento-card group flex flex-col justify-between"
               variants={itemVariants}
             >
               <div>
