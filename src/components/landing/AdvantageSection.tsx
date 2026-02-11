@@ -73,7 +73,7 @@ const AdvantageSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {features.map((f) => (
             <motion.div
