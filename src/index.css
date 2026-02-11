@@ -8,15 +8,15 @@
   :root {
     /* VendAI-Black #0A0A0A */
     --background: 0 0% 4%;
-    /* Titles #F5F5F7 */
-    --foreground: 240 5% 96.5%;
+    /* Titles #FFFFFF → #E0E0E0 gradient handled in utility */
+    --foreground: 0 0% 100%;
 
     /* Surfaces #161618 */
     --card: 240 4% 9%;
-    --card-foreground: 240 5% 96.5%;
+    --card-foreground: 0 0% 100%;
 
     --popover: 240 4% 9%;
-    --popover-foreground: 240 5% 96.5%;
+    --popover-foreground: 0 0% 100%;
 
     /* Electric Blue #2D5BFF */
     --primary: 225 100% 59%;
@@ -29,8 +29,8 @@
     --secondary-foreground: 240 2% 80%;
 
     --muted: 240 3% 15%;
-    /* Body text #A1A1AA */
-    --muted-foreground: 240 4% 65.9%;
+    /* Body text #86868B — Apple-style muted */
+    --muted-foreground: 240 2% 53%;
 
     --accent: 225 100% 59%;
     --accent-foreground: 0 0% 100%;
@@ -51,16 +51,16 @@
     /* Custom VendAI tokens */
     --glow-primary: 225 100% 59%;
     --glow-cyan: 184 100% 50%;
-    --surface-glass: 0 0% 100% / 0.03;
-    --surface-glass-border: 0 0% 100% / 0.06;
-    --surface-glass-hover: 0 0% 100% / 0.06;
+    --surface-glass: 0 0% 100% / 0.04;
+    --surface-glass-border: 0 0% 100% / 0.08;
+    --surface-glass-hover: 0 0% 100% / 0.08;
 
     --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 240 5% 96.5%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 225 100% 59%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3% 13%;
-    --sidebar-accent-foreground: 240 5% 96.5%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 100% / 0.063;
     --sidebar-ring: 225 100% 59%;
   }
@@ -74,6 +74,25 @@
   body {
     @apply bg-background text-muted-foreground antialiased;
     font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  /* Subtle noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -104,17 +123,17 @@
   }
 
   .glass {
-    background: hsl(var(--surface-glass));
-    border: 1px solid hsl(var(--surface-glass-border));
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: hsl(0 0% 100% / 0.04);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
   }
 
   .glass-strong {
-    background: hsl(0 0% 100% / 0.05);
-    border: 1px solid hsl(0 0% 100% / 0.08);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: hsl(0 0% 100% / 0.06);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(40px) saturate(1.4);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4);
   }
 
   .glass-hover:hover {
@@ -122,19 +141,19 @@
   }
 
   .glow-primary {
-    box-shadow: 0 0 40px -8px hsl(var(--glow-primary) / 0.4);
+    box-shadow: 0 0 60px -10px hsl(var(--glow-primary) / 0.5), 0 0 20px -5px hsl(var(--glow-primary) / 0.3);
   }
 
   .glow-primary-sm {
-    box-shadow: 0 0 20px -4px hsl(var(--glow-primary) / 0.3);
+    box-shadow: 0 0 30px -6px hsl(var(--glow-primary) / 0.4);
   }
 
   .glow-cyan {
-    box-shadow: 0 0 30px -6px hsl(var(--glow-cyan) / 0.3);
+    box-shadow: 0 0 40px -8px hsl(var(--glow-cyan) / 0.4);
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(240 5% 96.5%), hsl(240 2% 60%));
+    background: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 88%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -149,27 +168,64 @@
 
   .gradient-btn-primary {
     background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+    box-shadow: 0 0 40px -8px hsl(var(--glow-primary) / 0.5), 0 4px 16px -4px hsl(0 0% 0% / 0.4);
   }
 
   .gradient-btn-primary:hover {
-    background: linear-gradient(135deg, hsl(225 100% 64%), hsl(225 75% 48%));
-    box-shadow: 0 0 50px -8px hsl(var(--glow-primary) / 0.5);
+    background: linear-gradient(135deg, hsl(225 100% 66%), hsl(225 75% 50%));
+    box-shadow: 0 0 70px -8px hsl(var(--glow-primary) / 0.7), 0 4px 20px -4px hsl(0 0% 0% / 0.5);
+    transform: translateY(-1px);
   }
 
   .bento-card {
-    background: hsl(var(--card));
-    border: 1px solid hsl(var(--surface-glass-border));
+    position: relative;
+    background: hsl(0 0% 100% / 0.03);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid transparent;
+    background-clip: padding-box;
     @apply rounded-2xl p-6 transition-all ease-out;
     transition-duration: 400ms;
   }
 
+  /* Gradient border effect via pseudo-element */
+  .bento-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 100% / 0.1) 0%,
+      hsl(225 100% 59% / 0.15) 50%,
+      hsl(0 0% 100% / 0.05) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
   .bento-card:hover {
-    transform: translateY(-3px);
-    border-color: hsl(var(--primary) / 0.35);
+    transform: translateY(-4px);
+    background: hsl(0 0% 100% / 0.05);
+  }
+
+  .bento-card:hover::before {
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 100% / 0.15) 0%,
+      hsl(225 100% 59% / 0.4) 50%,
+      hsl(184 100% 50% / 0.15) 100%
+    );
+  }
+
+  .bento-card:hover {
     box-shadow:
-      0 8px 32px -8px hsl(var(--glow-primary) / 0.15),
-      0 0 0 1px hsl(var(--primary) / 0.1),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.03);
+      0 12px 40px -10px hsl(var(--glow-primary) / 0.2),
+      0 0 0 1px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.05);
   }
 
   /* Custom range slider */

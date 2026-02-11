@@ -19,16 +19,19 @@ const fadeUp = {
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden pt-32 pb-8">
-      {/* Mesh gradient — top corners */}
+      {/* Intensified Mesh gradients — vivid light behind glass */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full opacity-[0.07]"
-          style={{ background: "radial-gradient(circle, hsl(225 100% 59%), transparent 70%)" }}
+        <div className="absolute -top-40 -left-40 w-[800px] h-[800px] rounded-full opacity-[0.15]"
+          style={{ background: "radial-gradient(circle, hsl(225 100% 59%), transparent 65%)" }}
         />
-        <div className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.05]"
+        <div className="absolute -top-24 -right-48 w-[700px] h-[700px] rounded-full opacity-[0.1]"
+          style={{ background: "radial-gradient(circle, hsl(184 100% 50%), transparent 65%)" }}
+        />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[1000px] h-[600px] rounded-full opacity-[0.08]"
+          style={{ background: "radial-gradient(ellipse, hsl(225 100% 59%), transparent 60%)" }}
+        />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[400px] rounded-full opacity-[0.06]"
           style={{ background: "radial-gradient(circle, hsl(184 100% 50%), transparent 70%)" }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[800px] h-[500px] rounded-full opacity-[0.04]"
-          style={{ background: "radial-gradient(ellipse, hsl(225 100% 59%), transparent 70%)" }}
         />
       </div>
 
@@ -62,7 +65,7 @@ const HeroSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] tracking-tight mb-6"
+            className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold leading-[1.05] tracking-tight mb-6"
           >
             <span className="gradient-text">Tu soporte ya no responde,</span>
             <br />
@@ -75,7 +78,7 @@ const HeroSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "hsl(240 2% 53%)" }}
           >
             Libera <span className="text-foreground font-medium">+40h a la semana</span> a tu equipo humano
             mediante fuerza laboral digital nativa en Shopify.
