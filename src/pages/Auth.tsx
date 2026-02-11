@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { ArrowLeft, Loader2, Mail } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -29,7 +29,6 @@ type SignupValues = z.infer<typeof signupSchema>;
 const Auth = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [loading, setLoading] = useState(false);
-  const [confirmEmail, setConfirmEmail] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -51,7 +50,7 @@ const Auth = () => {
         password: values.password,
       });
       if (error) throw error;
-      navigate("/");
+      navigate("/profile");
     } catch (err: any) {
       toast({
         title: "Error al iniciar sesión",
@@ -73,12 +72,9 @@ const Auth = () => {
       const { error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
-        options: {
-          emailRedirectTo: window.location.origin,
-        },
       });
       if (error) throw error;
-      setConfirmEmail(values.email);
+      navigate("/profile");
     } catch (err: any) {
       toast({
         title: "Error al registrarse",
@@ -92,7 +88,6 @@ const Auth = () => {
 
   const switchMode = () => {
     setMode(mode === "login" ? "signup" : "login");
-    setConfirmEmail("");
     loginForm.reset();
     signupForm.reset();
   };
@@ -114,140 +109,115 @@ const Auth = () => {
         </Link>
 
         <AnimatePresence mode="wait">
-          {confirmEmail ? (
-            <motion.div
-              key="confirm"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="bento-card p-8 text-center"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-                <Mail size={32} className="text-primary" />
-              </div>
-              <h2 className="font-display text-2xl font-bold gradient-text mb-3">
-                Confirma tu correo
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Hemos enviado un enlace de verificación a{" "}
-                <span className="text-foreground font-medium">{confirmEmail}</span>.
-                Revisa tu bandeja de entrada para activar tu cuenta.
+          <motion.div
+            key={mode}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="bento-card p-8"
+          >
+            <div className="mb-8">
+              <h1 className="font-display text-2xl font-bold gradient-text mb-2">
+                {mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                {mode === "login"
+                  ? "Accede a tu cuenta de VendAI."
+                  : "Regístrate para empezar a usar VendAI."}
               </p>
-              <Button variant="hero-outline" className="rounded-full px-8" onClick={() => { setConfirmEmail(""); setMode("login"); }}>
-                Ir a Iniciar sesión
-              </Button>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={mode}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="bento-card p-8"
-            >
-              <div className="mb-8">
-                <h1 className="font-display text-2xl font-bold gradient-text mb-2">
-                  {mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  {mode === "login"
-                    ? "Accede a tu cuenta de VendAI."
-                    : "Regístrate para empezar a usar VendAI."}
-                </p>
-              </div>
+            </div>
 
-              {mode === "login" ? (
-                <Form {...loginForm}>
-                  <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-5">
-                    <FormField
-                      control={loginForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Correo electrónico</FormLabel>
-                          <FormControl>
-                            <Input type="email" placeholder="tu@empresa.com" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={loginForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Contraseña</FormLabel>
-                          <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button type="submit" variant="hero" className="w-full rounded-full" disabled={loading}>
-                      {loading ? <><Loader2 size={18} className="animate-spin" /> Entrando...</> : "Iniciar sesión"}
-                    </Button>
-                  </form>
-                </Form>
-              ) : (
-                <Form {...signupForm}>
-                  <form onSubmit={signupForm.handleSubmit(handleSignup)} className="space-y-5">
-                    <FormField
-                      control={signupForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Correo electrónico</FormLabel>
-                          <FormControl>
-                            <Input type="email" placeholder="tu@empresa.com" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={signupForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Contraseña</FormLabel>
-                          <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={signupForm.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Confirmar contraseña</FormLabel>
-                          <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button type="submit" variant="hero" className="w-full rounded-full" disabled={loading}>
-                      {loading ? <><Loader2 size={18} className="animate-spin" /> Registrando...</> : "Crear cuenta"}
-                    </Button>
-                  </form>
-                </Form>
-              )}
+            {mode === "login" ? (
+              <Form {...loginForm}>
+                <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-5">
+                  <FormField
+                    control={loginForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Correo electrónico</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="tu@empresa.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={loginForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Contraseña</FormLabel>
+                        <FormControl>
+                          <Input type="password" placeholder="••••••••" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" variant="hero" className="w-full rounded-full" disabled={loading}>
+                    {loading ? <><Loader2 size={18} className="animate-spin" /> Entrando...</> : "Iniciar sesión"}
+                  </Button>
+                </form>
+              </Form>
+            ) : (
+              <Form {...signupForm}>
+                <form onSubmit={signupForm.handleSubmit(handleSignup)} className="space-y-5">
+                  <FormField
+                    control={signupForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Correo electrónico</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="tu@empresa.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={signupForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Contraseña</FormLabel>
+                        <FormControl>
+                          <Input type="password" placeholder="••••••••" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={signupForm.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Confirmar contraseña</FormLabel>
+                        <FormControl>
+                          <Input type="password" placeholder="••••••••" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" variant="hero" className="w-full rounded-full" disabled={loading}>
+                    {loading ? <><Loader2 size={18} className="animate-spin" /> Registrando...</> : "Crear cuenta"}
+                  </Button>
+                </form>
+              </Form>
+            )}
 
-              <p className="text-sm text-muted-foreground text-center mt-6">
-                {mode === "login" ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}
-                <button onClick={switchMode} className="text-primary hover:underline font-medium">
-                  {mode === "login" ? "Regístrate" : "Inicia sesión"}
-                </button>
-              </p>
-            </motion.div>
-          )}
+            <p className="text-sm text-muted-foreground text-center mt-6">
+              {mode === "login" ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}
+              <button onClick={switchMode} className="text-primary hover:underline font-medium">
+                {mode === "login" ? "Regístrate" : "Inicia sesión"}
+              </button>
+            </p>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
