@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Producto", href: "#producto" },
@@ -47,9 +48,11 @@ const Header = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button variant="hero" size="sm" className="rounded-full px-6">
-            Agendar Demo
-          </Button>
+          <Link to="/demo">
+            <Button variant="hero" size="sm" className="rounded-full px-6">
+              Agendar Demo
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -82,9 +85,11 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Button variant="hero" size="sm" className="rounded-full mt-2">
-                Agendar Demo
-              </Button>
+              <Link to="/demo">
+                <Button variant="hero" size="sm" className="rounded-full mt-2 w-full">
+                  Agendar Demo
+                </Button>
+              </Link>
             </div>
           </motion.div>
         )}

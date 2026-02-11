@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const CTASection = () => {
   return (
@@ -33,10 +34,12 @@ const CTASection = () => {
               los resultados de tu equipo comercial.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
-                Agendar Demo Gratuita
-                <ArrowRight size={18} />
-              </Button>
+              <Link to="/demo">
+                <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
+                  Agendar Demo Gratuita
+                  <ArrowRight size={18} />
+                </Button>
+              </Link>
               <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
                 Contactar Ventas
               </Button>
