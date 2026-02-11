@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const solutions = [
   {
@@ -77,10 +78,12 @@ const SolutionsSection = () => {
                 ))}
               </div>
 
-              <Button variant="hero-outline" size="sm" className="rounded-full">
-                Saber más
-                <ArrowRight size={14} />
-              </Button>
+              <Link to="/demo">
+                <Button variant="hero-outline" size="sm" className="rounded-full">
+                  Saber más
+                  <ArrowRight size={14} />
+                </Button>
+              </Link>
             </motion.div>
           ))}
         </div>

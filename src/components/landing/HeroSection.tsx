@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Calculator } from "lucide-react";
+import { Link } from "react-router-dom";
 import ChatSimulator from "./ChatSimulator";
 
 const clientLogos = [
@@ -92,14 +93,18 @@ const HeroSection = () => {
             animate="visible"
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
-              Ver Agente en Acción
-              <ArrowRight size={18} />
-            </Button>
-            <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
-              <Calculator size={16} />
-              Calcular ROI
-            </Button>
+            <Link to="/demo">
+              <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
+                Ver Agente en Acción
+                <ArrowRight size={18} />
+              </Button>
+            </Link>
+            <Link to="/demo">
+              <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
+                <Calculator size={16} />
+                Calcular ROI
+              </Button>
+            </Link>
           </motion.div>
         </div>
 
