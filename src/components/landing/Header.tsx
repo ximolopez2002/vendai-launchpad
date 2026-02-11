@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const navLinks = [
   { label: "Producto", href: "#producto" },
@@ -14,11 +15,23 @@ const navLinks = [
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setLoggedIn(!!session?.user);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setLoggedIn(!!session?.user);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
@@ -48,9 +61,9 @@ const Header = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <Link to="/auth">
+          <Link to={loggedIn ? "/profile" : "/auth"}>
             <Button variant="ghost" size="sm" className="rounded-full px-5 text-muted-foreground hover:text-foreground">
-              Iniciar sesión
+              {loggedIn ? <><User size={16} /> Mi Perfil</> : "Iniciar sesión"}
             </Button>
           </Link>
           <Link to="/demo">
@@ -90,9 +103,9 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Link to="/auth">
+              <Link to={loggedIn ? "/profile" : "/auth"}>
                 <Button variant="ghost" size="sm" className="rounded-full mt-2 w-full text-muted-foreground hover:text-foreground">
-                  Iniciar sesión
+                  {loggedIn ? <><User size={16} /> Mi Perfil</> : "Iniciar sesión"}
                 </Button>
               </Link>
               <Link to="/demo">
