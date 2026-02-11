@@ -63,7 +63,7 @@ const AdvantageSection = () => {
 
         {/* Bento Grid - 3 columns, alternating 2-1 / 1-2 pattern */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto justify-items-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
