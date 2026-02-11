@@ -2,6 +2,7 @@ import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import AdvantageSection from "@/components/landing/AdvantageSection";
 import BentoSection from "@/components/landing/BentoSection";
+import ArchitectureSection from "@/components/landing/ArchitectureSection";
 import SolutionsSection from "@/components/landing/SolutionsSection";
 import ImpactCalculator from "@/components/landing/ImpactCalculator";
 import ROISection from "@/components/landing/ROISection";
@@ -15,6 +16,7 @@ const Index = () => {
       <HeroSection />
       <AdvantageSection />
       <BentoSection />
+      <ArchitectureSection />
       <SolutionsSection />
       <ImpactCalculator />
       <ROISection />
