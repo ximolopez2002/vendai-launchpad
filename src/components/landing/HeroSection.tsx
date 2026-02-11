@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Calculator } from "lucide-react";
+import ChatSimulator from "./ChatSimulator";
 
 const clientLogos = [
   "Allbirds", "Gymshark", "Huel", "Ridge", "MVMT", "Chubbies",
@@ -89,21 +90,8 @@ const HeroSection = () => {
               </div>
               <span className="text-[11px] text-muted-foreground ml-2 font-body">VendAI Agent — Live Preview</span>
             </div>
-            {/* Content area */}
-            <div className="relative flex items-center justify-center min-h-[340px] sm:min-h-[420px] lg:min-h-[480px]">
-              {/* Subtle inner glow */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-primary/5 rounded-full blur-[80px]" />
-              </div>
-              <div className="relative text-center px-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <div className="w-5 h-5 border-2 border-primary/40 border-t-primary rounded-full animate-spin" />
-                </div>
-                <p className="text-sm text-muted-foreground font-body">
-                  Interactive Agent Simulator Loading...
-                </p>
-              </div>
-            </div>
+            {/* Chat Simulator */}
+            <ChatSimulator />
           </div>
           {/* Outer glow shadow */}
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-primary/8 blur-[50px] pointer-events-none rounded-full" />
