@@ -6,50 +6,62 @@
 
 @layer base {
   :root {
+    /* VendAI-Black #0A0A0A */
     --background: 0 0% 4%;
-    --foreground: 0 0% 95%;
+    /* Titles #F5F5F7 */
+    --foreground: 240 5% 96.5%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 95%;
+    /* Surfaces #161618 */
+    --card: 240 4% 9%;
+    --card-foreground: 240 5% 96.5%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 240 4% 9%;
+    --popover-foreground: 240 5% 96.5%;
 
+    /* Electric Blue #2D5BFF */
     --primary: 225 100% 59%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 80%;
+    /* Darker blue for gradient #1A3DBF */
+    --primary-dark: 225 75% 43%;
 
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 55%;
+    --secondary: 240 3% 13%;
+    --secondary-foreground: 240 2% 80%;
+
+    --muted: 240 3% 15%;
+    /* Body text #86868B */
+    --muted-foreground: 240 2% 53.5%;
 
     --accent: 225 100% 59%;
     --accent-foreground: 0 0% 100%;
 
+    /* Cyan accent #00F2FE */
+    --cyan: 184 100% 50%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    /* Border #ffffff10 */
+    --border: 0 0% 100% / 0.063;
+    --input: 0 0% 100% / 0.063;
     --ring: 225 100% 59%;
 
     --radius: 0.75rem;
 
     /* Custom VendAI tokens */
     --glow-primary: 225 100% 59%;
-    --surface-glass: 0 0% 100% / 0.04;
-    --surface-glass-border: 0 0% 100% / 0.08;
-    --surface-glass-hover: 0 0% 100% / 0.07;
-    --text-tertiary: 0 0% 42%;
+    --glow-cyan: 184 100% 50%;
+    --surface-glass: 0 0% 100% / 0.03;
+    --surface-glass-border: 0 0% 100% / 0.06;
+    --surface-glass-hover: 0 0% 100% / 0.06;
 
     --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 95%;
+    --sidebar-foreground: 240 5% 96.5%;
     --sidebar-primary: 225 100% 59%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
+    --sidebar-accent: 240 3% 13%;
+    --sidebar-accent-foreground: 240 5% 96.5%;
+    --sidebar-border: 0 0% 100% / 0.063;
     --sidebar-ring: 225 100% 59%;
   }
 }
@@ -60,12 +72,13 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-muted-foreground antialiased;
     font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
+    color: hsl(var(--foreground));
   }
 }
 
@@ -78,10 +91,30 @@
     font-family: 'Inter', sans-serif;
   }
 
+  .text-title {
+    color: hsl(var(--foreground));
+  }
+
+  .text-body {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-cyan-accent {
+    color: hsl(var(--cyan));
+  }
+
   .glass {
     background: hsl(var(--surface-glass));
     border: 1px solid hsl(var(--surface-glass-border));
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-strong {
+    background: hsl(0 0% 100% / 0.05);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
 
   .glass-hover:hover {
@@ -96,27 +129,43 @@
     box-shadow: 0 0 20px -4px hsl(var(--glow-primary) / 0.3);
   }
 
+  .glow-cyan {
+    box-shadow: 0 0 30px -6px hsl(var(--glow-cyan) / 0.3);
+  }
+
   .gradient-text {
-    background: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 60%));
+    background: linear-gradient(135deg, hsl(240 5% 96.5%), hsl(240 2% 60%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-accent {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(225 100% 75%));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--cyan)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  .gradient-btn-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+  }
+
+  .gradient-btn-primary:hover {
+    background: linear-gradient(135deg, hsl(225 100% 64%), hsl(225 75% 48%));
+    box-shadow: 0 0 50px -8px hsl(var(--glow-primary) / 0.5);
+  }
+
   .bento-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--surface-glass-border));
+    @apply rounded-2xl p-6 transition-all duration-300;
   }
 
   .bento-card:hover {
-    background: hsl(var(--surface-glass-hover));
+    transform: translateY(-2px);
     border-color: hsl(var(--primary) / 0.2);
+    box-shadow: 0 8px 30px -10px hsl(var(--glow-primary) / 0.1);
   }
 
   /* Custom range slider */
@@ -136,11 +185,11 @@
     border-radius: 50%;
     background: hsl(var(--primary));
     cursor: pointer;
-    box-shadow: 0 0 12px -2px hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 14px -2px hsl(var(--primary) / 0.6);
     transition: box-shadow 0.2s;
   }
   .slider-vendai::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 18px -2px hsl(var(--primary) / 0.7);
+    box-shadow: 0 0 22px -2px hsl(var(--primary) / 0.8);
   }
   .slider-vendai::-moz-range-thumb {
     width: 20px;
@@ -149,7 +198,7 @@
     background: hsl(var(--primary));
     cursor: pointer;
     border: none;
-    box-shadow: 0 0 12px -2px hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 14px -2px hsl(var(--primary) / 0.6);
   }
   .slider-vendai:disabled::-webkit-slider-thumb {
     cursor: not-allowed;
@@ -163,12 +212,15 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--muted));
   border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
 }

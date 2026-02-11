@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Package, RotateCcw, BoxesIcon, Truck, CheckCircle2, MapPin } from "lucide-react";
 
@@ -33,30 +33,29 @@ const cardResponses: Record<string, { userText: string; botText: string }> = {
 };
 
 const TrackingCard = () => (
-  <div className="rounded-xl border border-border bg-background/60 overflow-hidden mt-2">
+  <div className="rounded-xl overflow-hidden mt-2" style={{ background: "hsl(240 4% 11%)", border: "1px solid hsl(0 0% 100% / 0.06)" }}>
     <div className="px-4 py-3 border-b border-border flex items-center justify-between">
       <span className="text-xs font-medium text-foreground">Pedido #SHP-29481</span>
-      <span className="text-[10px] font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">En Reparto</span>
+      <span className="text-[10px] font-medium text-cyan-accent bg-cyan/10 rounded-full px-2 py-0.5">En Reparto</span>
     </div>
     <div className="p-4 flex gap-3">
       <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-        <Package size={20} className="text-muted-foreground" />
+        <Package size={20} className="text-muted-foreground" strokeWidth={1.5} />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-foreground truncate">Sneakers Air Max Pro</p>
         <p className="text-xs text-muted-foreground mt-0.5">Talla 42 · Negro/Blanco</p>
         <div className="flex items-center gap-1.5 mt-2">
-          <Truck size={12} className="text-primary" />
-          <span className="text-[11px] text-primary font-medium">Llega hoy, 14:00–16:00h</span>
+          <Truck size={12} className="text-cyan-accent" strokeWidth={1.5} />
+          <span className="text-[11px] text-cyan-accent font-medium">Llega hoy, 14:00–16:00h</span>
         </div>
       </div>
     </div>
-    {/* Progress */}
     <div className="px-4 pb-4">
       <div className="flex items-center gap-1">
         {[1, 2, 3, 4].map((step) => (
-          <div key={step} className="flex-1 flex items-center gap-1">
-            <div className={`h-1 flex-1 rounded-full ${step <= 3 ? "bg-primary" : "bg-muted"}`} />
+          <div key={step} className="flex-1">
+            <div className={`h-1 rounded-full ${step <= 3 ? "bg-primary" : "bg-muted"}`} />
           </div>
         ))}
       </div>
@@ -68,41 +67,41 @@ const TrackingCard = () => (
       </div>
     </div>
     <div className="px-4 pb-3 flex items-center gap-1.5 text-muted-foreground">
-      <MapPin size={11} />
+      <MapPin size={11} strokeWidth={1.5} />
       <span className="text-[10px]">Calle Gran Vía 28, Madrid — SEUR Express</span>
     </div>
   </div>
 );
 
 const ReturnCard = () => (
-  <div className="rounded-xl border border-border bg-background/60 overflow-hidden mt-2">
+  <div className="rounded-xl overflow-hidden mt-2" style={{ background: "hsl(240 4% 11%)", border: "1px solid hsl(0 0% 100% / 0.06)" }}>
     <div className="px-4 py-3 border-b border-border flex items-center justify-between">
       <span className="text-xs font-medium text-foreground">Devolución #RET-7823</span>
       <span className="text-[10px] font-medium bg-emerald-500/10 text-emerald-400 rounded-full px-2 py-0.5">Aprobada</span>
     </div>
     <div className="p-4 flex gap-3">
       <div className="w-14 h-14 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-        <RotateCcw size={20} className="text-muted-foreground" />
+        <RotateCcw size={20} className="text-muted-foreground" strokeWidth={1.5} />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-foreground truncate">Camiseta Oversized Premium</p>
         <p className="text-xs text-muted-foreground mt-0.5">Talla L · Beige</p>
         <div className="flex items-center gap-1.5 mt-2">
-          <CheckCircle2 size={12} className="text-emerald-400" />
+          <CheckCircle2 size={12} className="text-emerald-400" strokeWidth={1.5} />
           <span className="text-[11px] text-emerald-400 font-medium">Reembolso de €49.90 en 24–48h</span>
         </div>
       </div>
     </div>
     <div className="px-4 pb-3">
       <div className="text-[10px] text-muted-foreground bg-muted/50 rounded-lg px-3 py-2">
-        📦 Etiqueta de envío generada automáticamente. Código: <span className="text-foreground font-mono">RET-ES-7823X</span>
+        📦 Etiqueta generada. Código: <span className="text-foreground font-mono">RET-ES-7823X</span>
       </div>
     </div>
   </div>
 );
 
 const StockCard = () => (
-  <div className="rounded-xl border border-border bg-background/60 overflow-hidden mt-2">
+  <div className="rounded-xl overflow-hidden mt-2" style={{ background: "hsl(240 4% 11%)", border: "1px solid hsl(0 0% 100% / 0.06)" }}>
     <div className="px-4 py-3 border-b border-border">
       <span className="text-xs font-medium text-foreground">Inventario — Tiempo Real</span>
     </div>
@@ -132,7 +131,7 @@ const StockCard = () => (
     </div>
     <div className="px-4 py-2.5 border-t border-border">
       <p className="text-[10px] text-muted-foreground">
-        ⚡ Alerta automática enviada al proveedor para <span className="text-foreground">Hoodie Essential</span>
+        ⚡ Alerta enviada al proveedor para <span className="text-foreground">Hoodie Essential</span>
       </p>
     </div>
   </div>
@@ -146,6 +145,15 @@ const ChatSimulator = () => {
   ]);
   const [showOptions, setShowOptions] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showProcessingGlow, setShowProcessingGlow] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll on new messages
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages, showOptions]);
 
   const handleOptionClick = useCallback((option: typeof optionButtons[0]) => {
     if (isAnimating) return;
@@ -155,13 +163,15 @@ const ChatSimulator = () => {
     const userMsg: ChatMessage = { id: Date.now(), type: "user", text: cardResponses[option.card].userText };
     setMessages((prev) => [...prev, userMsg]);
 
-    // Loading
+    // Show processing glow
     setTimeout(() => {
+      setShowProcessingGlow(true);
       const loadingMsg: ChatMessage = { id: Date.now() + 1, type: "loading", text: "Consultando API Shopify..." };
       setMessages((prev) => [...prev, loadingMsg]);
 
       // Response
       setTimeout(() => {
+        setShowProcessingGlow(false);
         setMessages((prev) => {
           const withoutLoading = prev.filter((m) => m.type !== "loading");
           return [
@@ -171,19 +181,38 @@ const ChatSimulator = () => {
           ];
         });
 
-        // Show options again
         setTimeout(() => {
           setShowOptions(true);
           setIsAnimating(false);
         }, 600);
-      }, 1400);
+      }, 1600);
     }, 400);
   }, [isAnimating]);
 
   return (
-    <div className="flex flex-col h-full min-h-[340px] sm:min-h-[420px] lg:min-h-[480px]">
+    <div className="flex flex-col h-full min-h-[340px] sm:min-h-[420px] lg:min-h-[480px] relative">
+      {/* Processing glow bar at bottom */}
+      <AnimatePresence>
+        {showProcessingGlow && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute bottom-0 left-0 right-0 h-1 z-20 overflow-hidden rounded-b-2xl"
+          >
+            <div
+              className="h-full w-full animate-shimmer"
+              style={{
+                backgroundImage: "linear-gradient(90deg, transparent, hsl(225 100% 59% / 0.6), hsl(184 100% 50% / 0.4), transparent)",
+                backgroundSize: "200% 100%",
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 scrollbar-thin">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3">
         <AnimatePresence mode="popLayout">
           {messages.map((msg) => (
             <motion.div
@@ -195,27 +224,29 @@ const ChatSimulator = () => {
             >
               {msg.type === "bot" && (
                 <div className="flex gap-2.5 max-w-[85%] sm:max-w-[75%]">
-                  <div className="w-7 h-7 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Bot size={14} className="text-primary" />
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{ background: "hsl(225 100% 59% / 0.12)" }}>
+                    <Bot size={14} className="text-primary" strokeWidth={1.5} />
                   </div>
-                  <div className="bg-secondary/80 rounded-2xl rounded-tl-md px-4 py-2.5">
+                  <div className="rounded-2xl rounded-tl-md px-4 py-2.5" style={{ background: "hsl(240 3% 15%)" }}>
                     <p className="text-sm text-foreground leading-relaxed">{msg.text}</p>
                   </div>
                 </div>
               )}
 
               {msg.type === "user" && (
-                <div className="bg-primary rounded-2xl rounded-tr-md px-4 py-2.5 max-w-[75%]">
+                <div className="gradient-btn-primary rounded-2xl rounded-tr-md px-4 py-2.5 max-w-[75%]">
                   <p className="text-sm text-primary-foreground">{msg.text}</p>
                 </div>
               )}
 
               {msg.type === "loading" && (
                 <div className="flex gap-2.5 max-w-[75%]">
-                  <div className="w-7 h-7 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Bot size={14} className="text-primary" />
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{ background: "hsl(225 100% 59% / 0.12)" }}>
+                    <Bot size={14} className="text-primary" strokeWidth={1.5} />
                   </div>
-                  <div className="bg-secondary/80 rounded-2xl rounded-tl-md px-4 py-2.5 flex items-center gap-2">
+                  <div className="rounded-2xl rounded-tl-md px-4 py-2.5 flex items-center gap-2" style={{ background: "hsl(240 3% 15%)" }}>
                     <div className="w-3.5 h-3.5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
                     <p className="text-sm text-muted-foreground">{msg.text}</p>
                   </div>
@@ -248,9 +279,9 @@ const ChatSimulator = () => {
                 <button
                   key={opt.label}
                   onClick={() => handleOptionClick(opt)}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary border border-primary/25 bg-primary/5 hover:bg-primary/10 hover:border-primary/40 rounded-full px-3.5 py-2 transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/35 rounded-full px-3.5 py-2 transition-all duration-200 hover:shadow-[0_0_12px_-3px_hsl(225_100%_59%_/_0.3)]"
                 >
-                  <opt.icon size={13} />
+                  <opt.icon size={13} strokeWidth={1.5} />
                   {opt.label}
                 </button>
               ))}
@@ -261,10 +292,10 @@ const ChatSimulator = () => {
 
       {/* Input bar (decorative) */}
       <div className="border-t border-border px-4 sm:px-6 py-3">
-        <div className="flex items-center gap-3 bg-muted/40 rounded-xl px-4 py-2.5">
-          <span className="text-sm text-muted-foreground/50 flex-1">Escribe un mensaje...</span>
-          <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-primary">
+        <div className="flex items-center gap-3 rounded-xl px-4 py-2.5" style={{ background: "hsl(240 3% 13%)" }}>
+          <span className="text-sm text-muted-foreground/40 flex-1">Escribe un mensaje...</span>
+          <div className="w-7 h-7 rounded-full gradient-btn-primary flex items-center justify-center opacity-60">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-primary-foreground">
               <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

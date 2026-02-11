@@ -42,22 +42,26 @@ const features = [
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
 };
 
 const BentoSection = () => {
   return (
-    <section id="producto" className="py-24 relative">
+    <section className="py-28 relative">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <p className="text-sm font-medium text-primary mb-3 font-display tracking-wide uppercase">
             Producto
           </p>
@@ -67,7 +71,7 @@ const BentoSection = () => {
           <p className="text-muted-foreground max-w-xl mx-auto">
             Una suite completa de herramientas de IA diseñadas para equipos comerciales B2B.
           </p>
-        </div>
+        </motion.div>
 
         {/* Bento Grid */}
         <motion.div
@@ -83,8 +87,9 @@ const BentoSection = () => {
               className={`bento-card group ${feature.className}`}
               variants={itemVariants}
             >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <feature.icon size={20} className="text-primary" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:shadow-[0_0_16px_-3px_hsl(225_100%_59%_/_0.3)]"
+                style={{ background: "hsl(225 100% 59% / 0.08)" }}>
+                <feature.icon size={20} className="text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                 {feature.title}
