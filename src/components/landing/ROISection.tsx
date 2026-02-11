@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calculator } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const roiMetrics = [
   { value: "3-6 meses", label: "Tiempo medio de payback" },
@@ -60,11 +61,13 @@ const ROISection = () => {
         </motion.div>
 
         <div className="text-center">
-          <Button variant="hero" size="lg" className="rounded-full px-8">
-            <Calculator size={18} />
-            Calcula tu ROI
-            <ArrowRight size={16} />
-          </Button>
+          <Link to="/demo">
+            <Button variant="hero" size="lg" className="rounded-full px-8">
+              <Calculator size={18} />
+              Calcula tu ROI
+              <ArrowRight size={16} />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

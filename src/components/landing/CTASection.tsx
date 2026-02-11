@@ -40,9 +40,11 @@ const CTASection = () => {
                   <ArrowRight size={18} />
                 </Button>
               </Link>
-              <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
-                Contactar Ventas
-              </Button>
+              <Link to="/demo">
+                <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
+                  Contactar Ventas
+                </Button>
+              </Link>
             </div>
           </div>
         </motion.div>
