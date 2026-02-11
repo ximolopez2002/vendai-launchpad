@@ -1,19 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Calculator } from "lucide-react";
+
+const clientLogos = [
+  "Allbirds", "Gymshark", "Huel", "Ridge", "MVMT", "Chubbies",
+];
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background gradient orbs */}
+    <section className="relative overflow-hidden pt-32 pb-8">
+      {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/3 blur-[100px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-primary/6 blur-[150px]" />
       </div>
 
       {/* Grid pattern */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
         style={{
           backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
@@ -21,6 +24,7 @@ const HeroSection = () => {
       />
 
       <div className="container mx-auto px-6 relative z-10">
+        {/* Hero Content */}
         <motion.div
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -31,50 +35,100 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.15 }}
             className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-muted-foreground mb-8"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Potenciado por Inteligencia Artificial
+            Fuerza laboral digital para Shopify
           </motion.div>
 
-          {/* Headline */}
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-6">
-            <span className="gradient-text">Vende más.</span>
+          {/* H1 */}
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] tracking-tight mb-6">
+            <span className="gradient-text">Tu soporte ya no responde,</span>
             <br />
-            <span className="gradient-text">Devuelve menos.</span>
-            <br />
-            <span className="gradient-text-accent">Decide con datos.</span>
+            <span className="gradient-text-accent">ahora ejecuta y vende.</span>
           </h1>
 
-          {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            VendAI es la plataforma de IA que ayuda a equipos B2B a reducir
-            devoluciones un 30% y acelerar el ciclo de ventas con predicciones
-            accionables.
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            Libera <span className="text-foreground font-medium">+40h a la semana</span> a tu equipo humano
+            mediante fuerza laboral digital nativa en Shopify.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
-              Agendar Demo Gratuita
+              Ver Agente en Acción
               <ArrowRight size={18} />
             </Button>
             <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
-              <Play size={16} />
-              Ver Demo en 2 min
+              <Calculator size={16} />
+              Calcular ROI
             </Button>
           </div>
+        </motion.div>
 
-          {/* Social proof */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-xs text-muted-foreground mt-12"
-          >
-            Usado por equipos de ventas en +50 empresas B2B
-          </motion.p>
+        {/* Demo Container */}
+        <motion.div
+          className="max-w-5xl mx-auto mb-24"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+        >
+          <div className="relative rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
+            {/* Glow ring */}
+            <div className="absolute -inset-px rounded-2xl pointer-events-none" style={{
+              background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), transparent 40%, transparent 60%, hsl(var(--primary) / 0.1))",
+            }} />
+            {/* Top bar */}
+            <div className="relative flex items-center gap-2 px-5 py-3 border-b border-border">
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/20" />
+              </div>
+              <span className="text-[11px] text-muted-foreground ml-2 font-body">VendAI Agent — Live Preview</span>
+            </div>
+            {/* Content area */}
+            <div className="relative flex items-center justify-center min-h-[340px] sm:min-h-[420px] lg:min-h-[480px]">
+              {/* Subtle inner glow */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-primary/5 rounded-full blur-[80px]" />
+              </div>
+              <div className="relative text-center px-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-5 h-5 border-2 border-primary/40 border-t-primary rounded-full animate-spin" />
+                </div>
+                <p className="text-sm text-muted-foreground font-body">
+                  Interactive Agent Simulator Loading...
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Outer glow shadow */}
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-primary/8 blur-[50px] pointer-events-none rounded-full" />
+        </motion.div>
+
+        {/* Social Proof */}
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <p className="text-xs text-muted-foreground uppercase tracking-widest font-display mb-8">
+            Potenciando a las marcas DTC líderes
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            {clientLogos.map((name) => (
+              <div
+                key={name}
+                className="text-muted-foreground/25 font-display text-lg sm:text-xl font-semibold tracking-wide select-none hover:text-muted-foreground/40 transition-colors duration-300"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
