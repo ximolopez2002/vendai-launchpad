@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +16,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -23,9 +24,11 @@ const Header = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setLoggedIn(!!session?.user);
+      setUserEmail(session?.user?.email ?? "");
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
       setLoggedIn(!!session?.user);
+      setUserEmail(session?.user?.email ?? "");
     });
 
     return () => {
@@ -62,9 +65,15 @@ const Header = () => {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link to={loggedIn ? "/profile" : "/auth"}>
-            <Button variant="ghost" size="sm" className="rounded-full px-5 text-muted-foreground hover:text-foreground">
-              {loggedIn ? <><User size={16} /> Mi Perfil</> : "Iniciar sesión"}
-            </Button>
+            {loggedIn ? (
+              <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary font-display text-sm font-bold cursor-pointer hover:bg-primary/30 transition-colors">
+                {userEmail.charAt(0).toUpperCase()}
+              </div>
+            ) : (
+              <Button variant="ghost" size="sm" className="rounded-full px-5 text-muted-foreground hover:text-foreground">
+                Iniciar sesión
+              </Button>
+            )}
           </Link>
           <Link to="/demo">
             <Button variant="hero" size="sm" className="rounded-full px-6">
@@ -103,10 +112,19 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Link to={loggedIn ? "/profile" : "/auth"}>
-                <Button variant="ghost" size="sm" className="rounded-full mt-2 w-full text-muted-foreground hover:text-foreground">
-                  {loggedIn ? <><User size={16} /> Mi Perfil</> : "Iniciar sesión"}
-                </Button>
+              <Link to={loggedIn ? "/profile" : "/auth"} onClick={() => setMobileOpen(false)}>
+                {loggedIn ? (
+                  <div className="flex items-center gap-3 py-3 px-4 rounded-lg glass-hover transition-colors mt-2">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary font-display text-sm font-bold">
+                      {userEmail.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm text-muted-foreground">{userEmail}</span>
+                  </div>
+                ) : (
+                  <Button variant="ghost" size="sm" className="rounded-full mt-2 w-full text-muted-foreground hover:text-foreground">
+                    Iniciar sesión
+                  </Button>
+                )}
               </Link>
               <Link to="/demo">
                 <Button variant="hero" size="sm" className="rounded-full w-full">
