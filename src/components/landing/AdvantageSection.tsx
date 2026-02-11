@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Layers, TrendingUp, Zap } from "lucide-react";
+import { ShieldCheck, Database, TrendingUp, Zap } from "lucide-react";
 
 const features = [
   {
@@ -9,9 +9,9 @@ const features = [
     className: "md:col-span-2 md:row-span-1",
   },
   {
-    title: "Nativo en Shopify",
+    title: "Integración Shopify Plus",
     description: "Lectura y escritura directa en tu ERP.",
-    icon: Layers,
+    icon: Database,
     className: "md:col-span-1 md:row-span-2",
   },
   {
@@ -21,7 +21,7 @@ const features = [
     className: "md:col-span-1 md:row-span-1",
   },
   {
-    title: "<10s Respuesta",
+    title: "Respuesta <10s",
     description: "Elimina el tiempo de espera.",
     icon: Zap,
     className: "md:col-span-1 md:row-span-1",
