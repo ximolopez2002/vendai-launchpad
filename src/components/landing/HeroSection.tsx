@@ -93,12 +93,12 @@ const HeroSection = () => {
             animate="visible"
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Link to="/demo">
-              <Button variant="hero" size="lg" className="rounded-full px-8 text-base animate-pulse-glow">
+            <a href="#live-preview">
+              <Button variant="hero" size="lg" className="rounded-full px-8 text-base">
                 Ver Agente en Acción
                 <ArrowRight size={18} />
               </Button>
-            </Link>
+            </a>
             <Link to="/demo">
               <Button variant="hero-outline" size="lg" className="rounded-full px-8 text-base">
                 <Calculator size={16} />
@@ -110,6 +110,7 @@ const HeroSection = () => {
 
         {/* Demo Container */}
         <motion.div
+          id="live-preview"
           className="max-w-5xl mx-auto mb-24 relative"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
