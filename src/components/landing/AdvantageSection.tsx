@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Database, TrendingUp, Zap } from "lucide-react";
+import { ShieldCheck, Database, TrendingUp, Zap, Globe, BarChart3 } from "lucide-react";
 
 const features = [
   {
@@ -21,6 +21,16 @@ const features = [
     title: "Respuesta <10s",
     description: "Elimina el tiempo de espera.",
     icon: Zap,
+  },
+  {
+    title: "Multilingüe Nativo",
+    description: "Atiende en +30 idiomas sin configuración adicional.",
+    icon: Globe,
+  },
+  {
+    title: "Analytics Accionables",
+    description: "Métricas de conversión y satisfacción en tiempo real.",
+    icon: BarChart3,
   },
 ];
 
@@ -59,7 +69,7 @@ const AdvantageSection = () => {
 
         {/* Bento Grid - 3 columns, alternating 2-1 / 1-2 pattern */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
