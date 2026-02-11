@@ -170,7 +170,7 @@ const ImpactCalculator = () => {
               </p>
             </div>
 
-            <Button variant="hero" size="lg" className="rounded-xl w-full mt-6 text-base animate-pulse-glow">
+            <Button variant="hero" size="lg" className="rounded-xl w-full mt-6 text-base">
               Enviar reporte a mi email
               <ArrowRight size={18} />
             </Button>
