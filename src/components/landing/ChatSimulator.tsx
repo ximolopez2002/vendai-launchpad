@@ -217,9 +217,9 @@ const ChatSimulator = () => {
           {messages.map((msg) => (
             <motion.div
               key={msg.id}
-              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              initial={{ opacity: 0, y: 16, scale: 0.92 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{ type: "spring", stiffness: 400, damping: 25, mass: 0.8 }}
               className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
             >
               {msg.type === "bot" && (
