@@ -89,8 +89,8 @@ export default {
           "100%": { opacity: "1" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 24px -4px hsl(225 100% 59% / 0.35)" },
-          "50%": { boxShadow: "0 0 36px -2px hsl(225 100% 59% / 0.55)" },
+          "0%, 100%": { boxShadow: "0 0 28px -4px hsl(225 100% 59% / 0.4), 0 0 8px -2px hsl(225 100% 59% / 0.2)" },
+          "50%": { boxShadow: "0 0 44px -2px hsl(225 100% 59% / 0.6), 0 0 14px -2px hsl(225 100% 59% / 0.3)" },
         },
         "pulse-border": {
           "0%, 100%": { borderColor: "hsl(225 100% 59% / 0.2)" },
