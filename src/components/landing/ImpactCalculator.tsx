@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, DollarSign, Ticket, Bot, TrendingDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const formatCurrency = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
@@ -170,10 +171,12 @@ const ImpactCalculator = () => {
               </p>
             </div>
 
-            <Button variant="hero" size="lg" className="rounded-xl w-full mt-6 text-base">
-              Enviar reporte a mi email
-              <ArrowRight size={18} />
-            </Button>
+            <Link to="/demo">
+              <Button variant="hero" size="lg" className="rounded-xl w-full mt-6 text-base">
+                Enviar reporte a mi email
+                <ArrowRight size={18} />
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>
