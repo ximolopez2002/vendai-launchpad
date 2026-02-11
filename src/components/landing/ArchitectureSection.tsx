@@ -31,7 +31,7 @@ const ArchitectureSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-2xl border border-white/10 bg-[hsl(var(--card))] p-8 md:p-12"
+          className="bento-card p-8 md:p-12"
         >
           <div className="flex items-center justify-between gap-4">
             {/* Shopify Plus */}
