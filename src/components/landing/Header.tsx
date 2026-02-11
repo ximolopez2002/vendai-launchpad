@@ -47,7 +47,12 @@ const Header = () => {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          <Link to="/auth">
+            <Button variant="ghost" size="sm" className="rounded-full px-5 text-muted-foreground hover:text-foreground">
+              Iniciar sesión
+            </Button>
+          </Link>
           <Link to="/demo">
             <Button variant="hero" size="sm" className="rounded-full px-6">
               Agendar Demo
@@ -85,8 +90,13 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
+              <Link to="/auth">
+                <Button variant="ghost" size="sm" className="rounded-full mt-2 w-full text-muted-foreground hover:text-foreground">
+                  Iniciar sesión
+                </Button>
+              </Link>
               <Link to="/demo">
-                <Button variant="hero" size="sm" className="rounded-full mt-2 w-full">
+                <Button variant="hero" size="sm" className="rounded-full w-full">
                   Agendar Demo
                 </Button>
               </Link>
