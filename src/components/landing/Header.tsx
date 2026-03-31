@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Producto", href: "#producto" },
   { label: "Soluciones", href: "#soluciones" },
   { label: "ROI", href: "#roi" },
-  { label: "Blog", href: "#blog" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const Header = () => {
@@ -51,15 +51,25 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Desktop CTA */}
@@ -102,16 +112,27 @@ const Header = () => {
             className="md:hidden glass-strong mt-2 mx-4 rounded-2xl overflow-hidden"
           >
             <div className="flex flex-col gap-1 p-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground py-3 px-4 rounded-lg glass-hover transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground py-3 px-4 rounded-lg glass-hover transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground py-3 px-4 rounded-lg glass-hover transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
               <Link to={loggedIn ? "/profile" : "/auth"} onClick={() => setMobileOpen(false)}>
                 {loggedIn ? (
                   <div className="flex items-center gap-3 py-3 px-4 rounded-lg glass-hover transition-colors mt-2">
