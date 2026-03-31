@@ -21,6 +21,7 @@ const Index = () => {
       <SolutionsSection />
       <ImpactCalculator />
       <ROISection />
+      <FAQSection />
       <CTASection />
       <Footer />
     </div>
